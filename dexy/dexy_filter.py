@@ -4,6 +4,7 @@ import shutil
 import platform
 import subprocess
 import os
+import warnings
 
 class DexyFilterException(Exception):
     pass
@@ -90,7 +91,7 @@ class DexyFilter(object):
         if set([ext, ".*"]).isdisjoint(set(klass.INPUT_EXTENSIONS)):
             exception_text = """Error in %s for %s. Extension %s is not supported.
             Supported extensions are: %s""" % (klass.__name__, key, ext, ', '.join(klass.INPUT_EXTENSIONS))
-            raise Exception(exception_text)
+            warnings.warn(exception_text)
 
         if ".*" in klass.OUTPUT_EXTENSIONS:
             out_ext = ext
