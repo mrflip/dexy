@@ -62,7 +62,7 @@ class EspeakFilter(SubprocessFilter):
 class AsciidocFilter(SubprocessFilter):
     VERSION_COMMAND = "asciidoc --version"
     EXECUTABLE = "asciidoc"
-    INPUT_EXTENSIONS = [".txt"]
+    INPUT_EXTENSIONS = [".asciidoc", ".ad", ".adoc", ".txt"]
     OUTPUT_EXTENSIONS = [".html", ".xml"]
     ALIASES = ['asciidoc']
     BINARY = False
