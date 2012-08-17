@@ -161,7 +161,7 @@ def filters(log=NULL_LOGGER):
                                 log.info("class %s is not available because it has no aliases" % klass.__name__)
                             elif len(klass.executables()) > 0 and not klass.executable():
                                 log.info("class %s is not available because %s not found" %
-                                              (klass.__name__, klass.executable()))
+                                              (klass.__name__, klass.executables()))
                             elif not klass.enabled():
                                 log.info("class %s is not available because it is not enabled" %
                                               (klass.__name__))
