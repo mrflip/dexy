@@ -57,12 +57,12 @@ class CowsaySubprocessStdoutFilter(SubprocessStdoutFilter):
 # use version at https://gist.github.com/3380298
 #
 
-# class WulignFilter(SubprocessStdoutFilter):
-#     """Pretty-print your .tsv files"""
-#     ALIASES           = ['wulign']
-#     EXECUTABLE        = "wu-lign"
-#     OUTPUT_EXTENSIONS = ['.tsv']
-#     VERSION_COMMAND   = "wu-lign --version"
+class WulignFilter(SubprocessStdoutFilter):
+    """Pretty-print your .tsv files"""
+    ALIASES           = ['wulign']
+    EXECUTABLE        = "wu-lign"
+    OUTPUT_EXTENSIONS = ['.tsv']
+    VERSION_COMMAND   = "wu-lign --version"
 
 class TailFilter(SubprocessStdoutFilter):
     ALIASES = ['tail']

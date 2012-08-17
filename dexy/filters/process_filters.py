@@ -43,10 +43,9 @@ class ProcessFilter(DexyFilter):
         if exitcode is None:
             raise Exception("no return code, proc not finished!")
         elif exitcode != 0 and self.CHECK_RETURN_CODE:
-            if self.ignore_errors():
-                self.artifact.log.warn("Nonzero exit status %s" % exitcode)
-                self.artifact.log.warn("output from process: %s" % stderr)
-            else:
+            self.artifact.log.warn("Nonzero exit status: %s" % exitcode)
+            self.artifact.log.warn("output from process: %s" % stderr)
+            if not self.ignore_errors():
                 raise DexyNonzeroExitException(command, exitcode, stderr)
 
     def setup_env(self):
@@ -152,8 +151,8 @@ class SubprocessFilter(ProcessFilter):
 
     def process(self):
         command = self.command_string()
-        proc, stdout = self.run_command(command, self.setup_env())
-        self.handle_subprocess_proc_return(command, proc.returncode, stdout)
+        proc, stdout, stderr = self.run_command(command, self.setup_env())
+        self.handle_subprocess_proc_return(command, proc.returncode, stderr)
         self.artifact.stdout = stdout
         self.copy_canonical_file()
         self.copy_additional_inputs()
@@ -172,7 +171,7 @@ class SubprocessFilter(ProcessFilter):
             self.log.debug("about to send input '%s'" % input_text)
 
         stdout, stderr = proc.communicate(input_text)
-        return (proc, stdout)
+        return (proc, stdout, stderr)
 
 class SubprocessStdoutFilter(SubprocessFilter):
     ALIASES = ['subprocessstdoutfilter']
@@ -199,12 +198,12 @@ class SubprocessStdoutFilter(SubprocessFilter):
             self.log.debug("about to send input '%s'" % input_text)
 
         stdout, stderr = proc.communicate(input_text)
-        return (proc, stdout)
+        return (proc, stdout, stderr)
 
     def process(self):
         command = self.command_string_stdout()
-        proc, stdout = self.run_command(command, self.setup_env())
-        self.handle_subprocess_proc_return(command, proc.returncode, stdout)
+        proc, stdout, stderr = self.run_command(command, self.setup_env())
+        self.handle_subprocess_proc_return(command, proc.returncode, stderr)
         self.artifact.set_data(stdout)
         self.copy_additional_inputs()
 
