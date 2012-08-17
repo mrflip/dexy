@@ -64,25 +64,9 @@ class CowsaySubprocessStdoutFilter(SubprocessStdoutFilter):
 #     OUTPUT_EXTENSIONS = ['.tsv']
 #     VERSION_COMMAND   = "wu-lign --version"
 
-class HeadFilter(SubprocessStdoutFilter):
-    EXECUTABLE = 'head'
-
 class TailFilter(SubprocessStdoutFilter):
+    ALIASES = ['tail']
     EXECUTABLE = 'tail'
-
-# class WulignFilter(SubprocessStdoutFilter):
-#     """Pretty-print your .tsv files"""
-#     ALIASES           = ['wulign']
-#     EXECUTABLE        = "wu-lign"
-#     OUTPUT_EXTENSIONS = ['.tsv']
-#     VERSION_COMMAND   = "wu-lign --version"
-# 
-# class CatFilter(SubprocessStdoutFilter):
-#     """Passthrough example"""
-#     ALIASES           = ['cat']
-#     EXECUTABLE        = "cat"
-#     OUTPUT_EXTENSIONS = ['.txt']
-#     VERSION_COMMAND   = "cat --version"
 
 class CowthinkSubprocessStdoutFilter(CowsaySubprocessStdoutFilter):
     ALIASES = ['cowthink']

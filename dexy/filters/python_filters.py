@@ -135,6 +135,20 @@ class HeadFilter(DexyFilter):
     def process_text(self, input_text):
         return "\n".join(input_text.split("\n")[0:10]) + "\n"
 
+class SnippetFilter(DexyFilter):
+    """
+    Returns just the first 5 and last 4 lines of input, with " ... " in between.
+    """
+    ALIASES = ['snippet']
+    def process_text(self, input_text):
+        lines = input_text.rstrip().split("\n")
+        if len(lines) <= 10:
+            snip = lines
+        else:
+            snip  = lines[0:5] + [" ... "] + lines[-4:len(lines)]
+        return "\n".join(snip) + "\n"
+        
+
 class WordWrapFilter(DexyFilter):
     """
     Wraps text after 79 characters (tries to preserve existing line breaks and
