@@ -129,9 +129,9 @@ class PexpectReplFilter(ProcessFilter):
 
         # Spawn the process
         proc = pexpect.spawn(
-                self.executable(),
-                cwd=cwd,
-                env=env)
+            self.executable(),
+            cwd=cwd,
+            env=env)
 
         self.log.debug("Capturing initial prompt...")
         try:
@@ -276,6 +276,7 @@ class PythonPexpectReplFilter(PexpectReplFilter):
     OUTPUT_LEXER = "pycon"
     TAGS = ['python', 'interpreter', 'language']
     VERSION_COMMAND = 'python --version'
+    INITIAL_PROMPT = ">>>"
 
     SAVE_VARS_TO_JSON_CMD = """
 import json
