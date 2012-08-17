@@ -6,3 +6,7 @@ logs/
 !dexy/artifacts/
 build
 dist
+test-examples/output
+test-examples/output-long
+examples/*/output
+examples/*/output-long

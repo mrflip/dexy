@@ -4,6 +4,13 @@ from ordereddict import OrderedDict
 from dexy.commands import UserFeedback
 
 class Ansi2HtmlFilter(DexyFilter):
+    """
+    Use Ansi2HTMLConverter to turn colored console output into HTML.
+
+    To use this, you must first
+
+        pip install ansi2html BeautifulSoup cssutils pynliner
+    """
     ALIASES = ['ansi2html']
     OUTPUT_EXTENSIONS = ['.html']
 
@@ -43,7 +50,7 @@ class Ansi2HtmlFilter(DexyFilter):
                 try:
                     from pynliner import Pynliner
                 except ImportError:
-                    raise UserFeedback("You must install BeautifulSoup, cssutils and pynliner in order to use 'inline' option.")
+                    raise UserFeedback("You must install BeautifulSoup, cssutils and pynliner in order to use 'inline' option:\n   pip install BeautifulSoup cssutils pynliner\n")
 
             output_dict = OrderedDict()
             for section_name, section_text in input_dict.iteritems():
