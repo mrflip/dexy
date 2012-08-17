@@ -64,10 +64,8 @@ class CowsaySubprocessStdoutFilter(SubprocessStdoutFilter):
 #     OUTPUT_EXTENSIONS = ['.tsv']
 #     VERSION_COMMAND   = "wu-lign --version"
 
-class HeadFilter(SubprocessStdoutFilter):
-    EXECUTABLE = 'head'
-
 class TailFilter(SubprocessStdoutFilter):
+    ALIASES = ['tail']
     EXECUTABLE = 'tail'
 
 class CowthinkSubprocessStdoutFilter(CowsaySubprocessStdoutFilter):
