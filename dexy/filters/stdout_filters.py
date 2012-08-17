@@ -52,13 +52,11 @@ class CowsaySubprocessStdoutFilter(SubprocessStdoutFilter):
         args = self.command_line_args() or ""
         text = self.artifact.input_text()
         return "%s %s \"%s\"" % (self.executable(), args, text)
-#
-# Halp plz -- always says "exit code 1" when I don't think it should.
-# use version at https://gist.github.com/3380298
-#
 
 class WulignFilter(SubprocessStdoutFilter):
-    """Pretty-print your .tsv files"""
+    """
+    Pretty-print your .tsv files; 'gem install wukong' before use.
+    """
     ALIASES           = ['wulign']
     EXECUTABLE        = "wu-lign"
     OUTPUT_EXTENSIONS = ['.tsv']
