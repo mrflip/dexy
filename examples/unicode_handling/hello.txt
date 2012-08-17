@@ -1,0 +1,7 @@
+
+
+Hello!
+
+Would you like to see some complicated foreign characters? Of course you would!
+
+{{ d['fancy_chars.rb'] }}
