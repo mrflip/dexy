@@ -86,10 +86,10 @@ class AsciidocFilter(SubprocessFilter):
 
         args = {
             'backend' : backend,
-            'infile' : os.path.basename(self.artifact.previous_canonical_filename),
+            'infile'  : os.path.basename(self.artifact.previous_canonical_filename),
             'outfile' : self.artifact.canonical_basename(),
-            'prog' : self.executable(),
-            'args' : self.command_line_args() or ""
+            'prog'    : self.executable(),
+            'args'    : self.command_line_args() or ""
         }
 
         return "%(prog)s -b %(backend)s %(args)s -o %(outfile)s %(infile)s" % args
