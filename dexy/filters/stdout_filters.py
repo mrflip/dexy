@@ -57,7 +57,7 @@ class WulignFilter(SubprocessStdoutFilter):
     """
     Pretty-print your .tsv files; 'gem install wukong' before use.
     """
-    ALIASES           = ['wulign']
+    ALIASES           = ['wulign', 'wu-lign']
     EXECUTABLE        = "wu-lign"
     OUTPUT_EXTENSIONS = ['.tsv']
     VERSION_COMMAND   = "wu-lign --version"
@@ -98,6 +98,23 @@ class RubySubprocessStdoutFilter(SubprocessStdoutFilter):
     INPUT_EXTENSIONS = [".txt", ".rb"]
     OUTPUT_EXTENSIONS = [".txt"]
     ALIASES = ['rb']
+
+class RakeSubprocessStdoutFilter(SubprocessStdoutFilter):
+    EXECUTABLE = 'rake --trace -f'
+    VERSION_COMMAND = 'rake --version'
+    # INPUT_EXTENSIONS = [".txt", ".rb"]
+    OUTPUT_EXTENSIONS = [".txt"]
+    ALIASES = ['rake']
+    def command_string_stdout(self):
+        args = {
+            'prog' :        self.executable(),
+            'all_args':     self.artifact.args,
+            'args' :        self.command_line_args() or "",
+            'scriptargs' :  self.command_line_scriptargs() or "",
+            'script_file' : os.path.basename(self.artifact.previous_canonical_filename)
+        }
+        # self.log.debug("commandline '%(prog)s %(args)s %(script_file)s %(scriptargs)s'; %(all_args)s" % (args))
+        return "%(prog)s %(script_file)s %(args)s %(scriptargs)s" % args
 
 class SloccountFilter(SubprocessStdoutFilter):
     EXECUTABLE = 'sloccount'
